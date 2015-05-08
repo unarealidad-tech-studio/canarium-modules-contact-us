@@ -1,0 +1,29 @@
+<div class="block">
+<div class="block-title">
+    <h2>Contact Us Module</h2>
+</div>
+<table class="table table-striped table-borderless table-vcenter table-condensed">
+<thead>
+<tr>
+	<th width="10">ID</th>
+    <th width="10%">Date</th>
+    <th>Full Name</th>
+</tr>
+</thead>
+<?php foreach($paginator as $entry) : ?>
+<tr>
+	<td><span class="label label-default"><?=$entry->getId()?></span></td>
+    <td><?=$entry->getDate()->format('m/d/Y')?></td>
+    <td><a href="<?=$this->url('admin/contactus',array('action' => 'view', 'id' => $entry->getId()))?>"><?=$entry->getFirstname()?> <?=$entry->getLastname()?></a></td>
+</tr>
+<?php endforeach; ?>
+</table>
+<?php echo
+$this->paginationControl(
+$this->paginator,
+'sliding',
+array('partial/paginator', 'CanariumCore'),
+$this->routeParams
+)?>
+
+</div>
