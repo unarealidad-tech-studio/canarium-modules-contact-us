@@ -1,0 +1,111 @@
+<div id="contact-us-section" class="content image-full">
+            <div class="container">
+                <div class="row">
+                    <table style="width: 100%">
+                    <tr>
+                    <td class="hero-text"  style="background-image: url('<?=$page->getOneAttachmentBy(array('title' => 'Contact Us'))->getPath()?>');">
+                        <div class="text-overlay">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="heading">CONTACT US</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <span class="icon share"></span>
+                                    <div class="share-tools">
+                                        <a href="javascript:void(0)" onClick="social.shareThis(event,'fb','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="fb-icon"></span></a><a href="#" onClick="social.shareThis(event,'twitter','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="twitter-icon"></span></a><a href="#" onClick="social.shareThis(event,'google','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="googleplus-icon"></span></a><a href="#" onClick="social.shareThis(event,'pinterest','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="pinterest-icon"></span></a>
+                                    </div>
+                                    <div class="vertical-line"></div>
+                                    <div class="description"><?=$page->getOneSectionBy(array('name' => 'Content'))->getContent()?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="personal-info">
+                            <?php
+                            $form = $this->form;
+                            $form->prepare();
+                            ?>
+                            <?=$this->form()->openTag($form)?>
+                            <div class="form-group">
+                                <label for="first-name" class="col-xs-12 col-sm-4">First Name*</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('firstname'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name" class="col-xs-12 col-sm-4">Last Name*</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('lastname'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="country"  class="col-sm-4">Country*</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('country'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="col-xs-12 col-sm-4">City*</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('city'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal-code" class="col-sm-4">Postal Code*</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('postalcode'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email-adderss" class="col-sm-4">Email Address*</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('email'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile" class="col-sm-4">Mobile</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('mobileno'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-sm-4">Telephone</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('phoneno'))?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inquiry"  class="col-sm-4">Inquiry Type*</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('inquirytype'))?>
+                                </div>
+                            </div>
+                            <div class="form-group comments-input">
+                                <label for="comments" class="col-sm-4">Comments</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formRow($form->get('contact-us')->get('comments'))?>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <br />
+                            <div class="form-group capcha">
+                                <label for="capcha" class="col-sm-4">Capcha*</label>
+                                <div class="col-sm-8">
+                                    <?=$this->formCaptcha($form->get('contact-us')->get('captcha'))?>
+                                </div>
+                            </div>
+
+                            <div class="form-group submit-form">
+                                <label for="submit" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <input type="submit" class="btn continue" value="Submit">
+                                </div>
+                            </div>
+                        <?=$this->form()->closeTag()?>
+                    </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+      </div>
