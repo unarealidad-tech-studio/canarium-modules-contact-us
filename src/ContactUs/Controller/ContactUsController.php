@@ -5,12 +5,23 @@ namespace ContactUs\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use ContactUs\Service\ContactUs as ContactUsService;
+
 class ContactUsController extends AbstractActionController
 {
+    /**
+     * @var ContactUsService
+     */
+    protected $contactUsService;
+
     public function indexAction()
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $page = $objectManager->getRepository('Page\Entity\Page')->findOneBy(array('title' => 'Contact Us'));
+
+        if (!$page) {
+            throw new \ErrorHandler\Exception\NotFoundException('Page not found');
+        }
 
         $form = new \ContactUs\Form\ContactUsForm($objectManager);
         $entity = new \ContactUs\Entity\ContactUs();
@@ -22,15 +33,15 @@ class ContactUsController extends AbstractActionController
                 $objectManager->persist($entity);
                 $objectManager->flush();
 
-                // USER
-                $mailService = $this->getServiceLocator()->get('goaliomailservice_message');
-                $mail = $mailService->createHtmlMessage(array('email' => 'info@unarealidad.com','name' =>'UNA REALIDAD'), $entity->getEmail(), 'Thank you', 'contact-us/contact-us/email', array('entity' => $entity) );
-                $mailService->send($mail);
+                $this->getContactUsService()->sendUserSuccessEmail(
+                    $entity,
+                    'contact-us/contact-us/email'
+                );
 
-                // ADMIN
-                $mailService = $this->getServiceLocator()->get('goaliomailservice_message');
-                $mail = $mailService->createHtmlMessage(array('email' => 'info@unarealidad.com','name' =>'UNA REALIDAD'), 'jethro.laviste@unarealidad.com', 'Contact Us :: Averilla Y Arrellano', 'contact-us/contact-us/email-admin', array('entity' => $entity) );
-                $mailService->send($mail);
+                $this->getContactUsService()->sendAdminSuccessEmail(
+                    $entity,
+                    'contact-us/contact-us/email-admin'
+                );
 
                 $view = new ViewModel();
                 $view->setTemplate('contact-us/contact-us/thank-you');
@@ -42,5 +53,19 @@ class ContactUsController extends AbstractActionController
         $view->page = $page;
         $view->form = $form;
         return $view;
+    }
+
+    public function getContactUsService()
+    {
+        if (!$this->contactUsService) {
+            $this->contactUsService = $this->getServiceLocator()->get('canariumcontactus_contactus_service');
+        }
+        return $this->contactUsService;
+    }
+
+    public function setContactUsService(ContactUsService $contactUsService)
+    {
+        $this->contactUsService = $contactUsService;
+        return $this;
     }
 }

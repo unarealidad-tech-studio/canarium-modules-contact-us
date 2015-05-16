@@ -39,4 +39,19 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'invokables' => array(
+                'canariumcontactus_contactus_service' => 'ContactUs\Service\ContactUs'
+            ),
+            'factories' => array(
+                'canariumcontactus_module_options' => function ($sm) {
+                    $config = $sm->get('Config');
+                    return new Options\ModuleOptions(isset($config['canariumcontactus']) ? $config['canariumcontactus'] : array());
+                }
+            )
+        );
+    }
 }
