@@ -19,10 +19,6 @@ class ContactUsController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $page = $objectManager->getRepository('Page\Entity\Page')->findOneBy(array('title' => 'Contact Us'));
 
-        if (!$page) {
-            throw new \ErrorHandler\Exception\NotFoundException('Page not found');
-        }
-
         $form = new \ContactUs\Form\ContactUsForm($objectManager);
         $entity = new \ContactUs\Entity\ContactUs();
         $form->bind($entity);

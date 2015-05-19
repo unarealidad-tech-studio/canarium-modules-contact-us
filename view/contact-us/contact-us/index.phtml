@@ -3,19 +3,11 @@
                 <div class="row">
                     <table style="width: 100%">
                     <tr>
-                    <td class="hero-text"  style="background-image: url('<?=$page->getOneAttachmentBy(array('title' => 'Contact Us'))->getPath()?>');">
+                    <td class="hero-text">
                         <div class="text-overlay">
                             <div class="row">
                                 <div class="col-md-3">
                                     <span class="heading">CONTACT US</span>
-                                </div>
-                                <div class="col-md-9">
-                                    <span class="icon share"></span>
-                                    <div class="share-tools">
-                                        <a href="javascript:void(0)" onClick="social.shareThis(event,'fb','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="fb-icon"></span></a><a href="#" onClick="social.shareThis(event,'twitter','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="twitter-icon"></span></a><a href="#" onClick="social.shareThis(event,'google','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="googleplus-icon"></span></a><a href="#" onClick="social.shareThis(event,'pinterest','<?php echo $this->serverUrl()?>/<?php echo $page->getPermalink() ?>')"><span class="pinterest-icon"></span></a>
-                                    </div>
-                                    <div class="vertical-line"></div>
-                                    <div class="description"><?=$page->getOneSectionBy(array('name' => 'Content'))->getContent()?></div>
                                 </div>
                             </div>
                         </div>

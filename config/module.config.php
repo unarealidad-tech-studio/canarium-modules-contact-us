@@ -7,7 +7,7 @@ return array(
 		  'cache' => 'array',
 		  'paths' => array(__DIR__ . '/../src/ContactUs/Entity')
 		),
-	
+
 		'orm_default' => array(
 		  'drivers' => array(
 			'ContactUs\Entity' => 'contactus_entities'
@@ -22,16 +22,16 @@ return array(
 			'Admin\ContactUs' => 'ContactUs\Controller\AdminController',
         ),
     ),
-	
+
 	'bjyauthorize' => array(
 		'guards' => array(
 			'BjyAuthorize\Guard\Route' => array(
-				array('route' => 'contactus', 'roles' => array('user','guest')),
+				array('route' => 'contactus', 'roles' => array('user','admin','guest')),
 				array('route' => 'admin/contactus', 'roles' => array('admin')),
 			),
 		),
 	),
-	
+
 	'router' => array(
         'routes' => array(
 			'admin' => array(
@@ -52,7 +52,7 @@ return array(
                     ),
 				),
 			),
-			
+
 			'contactus' => array(
 				'type'    => 'Literal',
 				'options' => array(
@@ -64,17 +64,17 @@ return array(
 				),
 				'may_terminate' => true,
 			),
-			
-			
+
+
         ),
     ),
-	
+
     'view_manager' => array(
         'template_path_stack' => array(
             'contact-us' => __DIR__ . '/../view',
         ),
 		'template_map' => array(
-		
+
         ),
     ),
 );
