@@ -25,9 +25,9 @@ return array(
 
 	'bjyauthorize' => array(
 		'guards' => array(
-			'BjyAuthorize\Guard\Route' => array(
-				array('route' => 'contactus', 'roles' => array('user','admin','guest')),
-				array('route' => 'admin/contactus', 'roles' => array('admin')),
+			'BjyAuthorize\Guard\Controller' => array(
+				array('controller' => 'ContactUs', 'roles' => array('user', 'guest')),
+                array('controller' => 'Admin\ContactUs', 'roles' => array('user', 'admin')),
 			),
 		),
 	),
