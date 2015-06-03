@@ -19,7 +19,9 @@ class ContactUsController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $page = $objectManager->getRepository('Page\Entity\Page')->findOneBy(array('title' => 'Contact Us'));
 
-        $form = new \ContactUs\Form\ContactUsForm($objectManager);
+        $config = $this->getServiceLocator()->get('Config');
+        $form = new \ContactUs\Form\ContactUsForm($objectManager, $config['recaptcha']);
+
         $entity = new \ContactUs\Entity\ContactUs();
         $form->bind($entity);
         $post = $this->request->getPost();

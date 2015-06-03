@@ -7,15 +7,15 @@ use Zend\Form\Form;
 
 class ContactUsForm extends Form
 {
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ObjectManager $objectManager, $captchaConfig=array())
     {
         parent::__construct('contactus-form');
-		
+
         $this->setHydrator(new DoctrineHydrator($objectManager));
-		
-        $fieldset = new ContactUsFieldset($objectManager);
+
+        $fieldset = new ContactUsFieldset($objectManager, $captchaConfig);
         $fieldset->setUseAsBaseFieldset(true);
         $this->add($fieldset);
-		
+
     }
 }

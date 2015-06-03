@@ -8,11 +8,11 @@ use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Element;
 class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 {
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ObjectManager $objectManager, $captchaConfig = array())
     {
         parent::__construct('contact-us');
 
-        $this->setHydrator(new DoctrineHydrator($objectManager,'ContactUs\Entity\ContactUs'))->setObject(new \ContactUs\Entity\ContactUs());
+	    $this->setHydrator(new DoctrineHydrator($objectManager,'ContactUs\Entity\ContactUs'))->setObject(new \ContactUs\Entity\ContactUs());
 		$this->objectManager = $objectManager;
 		$this->add(array(
             'name' => 'id',
@@ -20,7 +20,7 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
                 'type'  => 'hidden',
             ),
         ));
-		
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'firstname',
@@ -30,7 +30,7 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'lastname',
@@ -40,9 +40,10 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
+
 		$select = new \Zend\Form\Element\Select('country');
 		$select->setValueOptions(array(
+				'' => '-- Select --',
 				'AF' => 'Afghanistan',
 				'AL' => 'Albania',
 				'DZ' => 'Algeria',
@@ -265,7 +266,7 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 		$select->setAttribute('class','form-control');
 		$select->setAttribute('required','required');
 		$this->add($select);
-		
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'city',
@@ -275,8 +276,8 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
-		$this->add(array(
+
+		/*$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'postalcode',
 			'attributes' => array(
@@ -284,8 +285,8 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'class' => 'form-control',
 				'required' => 'required',
 			),
-        ));
-		
+        ));*/
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'email',
@@ -295,8 +296,8 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
-		$this->add(array(
+
+		/*$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'mobileno',
 			'attributes' => array(
@@ -305,7 +306,7 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'phoneno',
@@ -315,7 +316,7 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		
+
 		$select = new \Zend\Form\Element\Select('inquirytype');
 		$select->setValueOptions(array(
 			 'NA' => 'NA',
@@ -323,7 +324,8 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 		$select->setAttribute('class','form-control');
 		$select->setAttribute('required','required');
 		$this->add($select);
-		
+		*/
+
 		$this->add(array(
             'type' => 'Zend\Form\Element\Textarea',
             'name' => 'comments',
@@ -332,30 +334,28 @@ class ContactUsFieldset extends Fieldset implements InputFilterProviderInterface
 				'required' => 'required',
 			),
         ));
-		$pubKey = '6Le8uQMTAAAAAJvoBTgUTtMi4Qhy4VKGAJEqeQ4l';
-		$privKey = '6Le8uQMTAAAAAHQYn5BWffSrIcpPIpmRA2qmT4Vy';
-		$recaptcha = new \ZendService\ReCaptcha\ReCaptcha($pubKey, $privKey);
-		
-		$captcha = new \Zend\Captcha\ReCaptcha(array('theme' => 'white'));
-		$captcha->setPubkey($pubKey);
-		$captcha->setPrivkey($privKey);
-		
-		$this->add(array(
-		 'type' => 'Zend\Form\Element\Captcha',
-		 'name' => 'captcha',
-		 'options' => array(
-			 'label' => 'Please verify you are human',
-			 'captcha' => $captcha
-		 ),
-	 ));
-		
+
+		$captcha = new \Zend\Captcha\ReCaptcha($captchaConfig['options']);
+		$captcha->setPubkey($captchaConfig['pubKey']);
+		$captcha->setPrivkey($captchaConfig['privKey']);
+
+		$this->add(
+			array(
+				'type' => 'Zend\Form\Element\Captcha',
+				'name' => 'captcha',
+				'options' => array(
+				'label' => 'Please verify you are human',
+				'captcha' => $captcha
+			),
+		));
+
     }
-	
+
 	public function getInputFilterSpecification(){
-		return array(			
-			
+		return array(
+
         );
 	}
 
-    
+
 }
