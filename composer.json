@@ -1,5 +1,5 @@
 {
-    "name":         "canarium/canarium-modules/contact-us",
+    "name":         "unarealidad/canarium-modules-contact-us",
     "type":         "library",
     "description":  "Lorem Ipsum",
     "keywords":     ["canarium", "una realidad"],
@@ -25,7 +25,7 @@
     "minimum-stability": "dev",
 
     "require": {
-        "canarium/canarium-kernal/canarium-core" : "dev-master"
+        "unarealidad/canarium-kernal-core" : "dev-master"
     },
 
     "repositories": [
