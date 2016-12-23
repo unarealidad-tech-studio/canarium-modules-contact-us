@@ -2,12 +2,12 @@
 
 return array(
     'canariumcontactus' => array(
-        // 'email_sender' => array(
-        //     'email' => 'info@unarealidad.com',
-        //     'name'  => 'UNA REALIDAD'
-        // ),
-        // 'email_admin'         => 'jethro.laviste@unarealidad.com',
-        // 'email_subject'       => 'Thank you',
-        // 'email_admin_subject' => 'Contact Us'
+         'email_sender' => array(
+             'email' => 'sometwo@something.com',
+             'name'  => 'The name of the sender'
+         ),
+         'email_admin'         => 'someone@something.com',
+         'email_subject'       => 'Thank you',
+         'email_admin_subject' => 'Contact Us'
     )
 );
